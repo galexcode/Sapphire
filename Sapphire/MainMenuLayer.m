@@ -8,7 +8,8 @@
 
 
 // Import the interfaces
-#import "HelloWorldLayer.h"
+#import "MainMenuLayer.h"
+#import "CharacterCreationLayer.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -16,7 +17,7 @@
 #pragma mark - HelloWorldLayer
 
 // HelloWorldLayer implementation
-@implementation HelloWorldLayer
+@implementation MainMenuLayer
 
 // Helper class method that creates a Scene with the HelloWorldLayer as the only child.
 +(CCScene *) scene
@@ -25,7 +26,7 @@
 	CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	HelloWorldLayer *layer = [HelloWorldLayer node];
+	MainMenuLayer *layer = [MainMenuLayer node];
 	
 	// add layer as a child to scene
 	[scene addChild: layer];
@@ -42,16 +43,16 @@
 	if( (self=[super init]) ) {
 		
 		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Marker Felt" fontSize:64];
-
-		// ask director for the window size
+//		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Marker Felt" fontSize:64];
+//
+//		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
-	
-		// position the label on the center of the screen
-		label.position =  ccp( size.width /2 , size.height/2 );
-		
-		// add the label as a child to this Layer
-		[self addChild: label];
+//	
+//		// position the label on the center of the screen
+//		label.position =  ccp( size.width /2 , size.height/2 );
+//		
+//		// add the label as a child to this Layer
+//		[self addChild: label];
 		
 		
 		
@@ -91,12 +92,19 @@
 			[leaderboardViewController release];
 		}
 									   ];
-		
+        
+        CCMenuItem *startButton = [CCMenuItemFont itemWithString:@"Start" block:^(id sender) {
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[CharacterCreationLayer scene]]]; 
+        }
+                            ];
+                            
+		CCMenu *startMenu = [CCMenu menuWithItems: startButton, nil];
 		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
 		
 		[menu alignItemsHorizontallyWithPadding:20];
 		[menu setPosition:ccp( size.width/2, size.height/2 - 50)];
 		
+        [self addChild:startMenu];
 		// Add the menu to the layer
 		[self addChild:menu];
 
