@@ -135,6 +135,11 @@
 		D82C7C3E17339AF70051D306 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D82C7C3D17339AF70051D306 /* IntroLayer.m */; };
 		D82C7C461736FED40051D306 /* CharacterCreationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D82C7C451736FED40051D306 /* CharacterCreationLayer.m */; };
 		D86E238E17376CFF00915020 /* CCScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E238D17376CFF00915020 /* CCScrollLayer.m */; };
+		D86E23911738A49C00915020 /* CCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E23901738A49C00915020 /* CCTextField.m */; };
+		D86E23971738C39400915020 /* CharacterClassLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E23961738C39400915020 /* CharacterClassLayer.m */; };
+		D86E23A81738D7EB00915020 /* Brute.png in Resources */ = {isa = PBXBuildFile; fileRef = D86E23A51738D7EA00915020 /* Brute.png */; };
+		D86E23A91738D7EB00915020 /* Rogue.png in Resources */ = {isa = PBXBuildFile; fileRef = D86E23A61738D7EA00915020 /* Rogue.png */; };
+		D86E23AA1738D7EB00915020 /* Soldier.png in Resources */ = {isa = PBXBuildFile; fileRef = D86E23A71738D7EB00915020 /* Soldier.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -404,6 +409,13 @@
 		D82C7C451736FED40051D306 /* CharacterCreationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterCreationLayer.m; sourceTree = "<group>"; };
 		D86E238C17376CFF00915020 /* CCScrollLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScrollLayer.h; sourceTree = "<group>"; };
 		D86E238D17376CFF00915020 /* CCScrollLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScrollLayer.m; sourceTree = "<group>"; };
+		D86E238F1738A49C00915020 /* CCTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCTextField.h; sourceTree = "<group>"; };
+		D86E23901738A49C00915020 /* CCTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCTextField.m; sourceTree = "<group>"; };
+		D86E23951738C39400915020 /* CharacterClassLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterClassLayer.h; sourceTree = "<group>"; };
+		D86E23961738C39400915020 /* CharacterClassLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterClassLayer.m; sourceTree = "<group>"; };
+		D86E23A51738D7EA00915020 /* Brute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Brute.png; sourceTree = "<group>"; };
+		D86E23A61738D7EA00915020 /* Rogue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rogue.png; sourceTree = "<group>"; };
+		D86E23A71738D7EB00915020 /* Soldier.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Soldier.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -508,6 +520,8 @@
 		D82C7ADA17339AF30051D306 /* cocos2d */ = {
 			isa = PBXGroup;
 			children = (
+				D86E238F1738A49C00915020 /* CCTextField.h */,
+				D86E23901738A49C00915020 /* CCTextField.m */,
 				D86E238C17376CFF00915020 /* CCScrollLayer.h */,
 				D86E238D17376CFF00915020 /* CCScrollLayer.m */,
 				D82C7ADB17339AF30051D306 /* CCAction.h */,
@@ -840,14 +854,35 @@
 		D82C7C4B1737031D0051D306 /* Layers */ = {
 			isa = PBXGroup;
 			children = (
+				D86E23981738C39A00915020 /* Character Creation */,
 				D82C7C3917339AF70051D306 /* MainMenuLayer.h */,
 				D82C7C3A17339AF70051D306 /* MainMenuLayer.m */,
-				D82C7C441736FED40051D306 /* CharacterCreationLayer.h */,
-				D82C7C451736FED40051D306 /* CharacterCreationLayer.m */,
 				D82C7C3C17339AF70051D306 /* IntroLayer.h */,
 				D82C7C3D17339AF70051D306 /* IntroLayer.m */,
 			);
 			name = Layers;
+			sourceTree = "<group>";
+		};
+		D86E23981738C39A00915020 /* Character Creation */ = {
+			isa = PBXGroup;
+			children = (
+				D86E23AB1738D82600915020 /* Character Class Images */,
+				D82C7C441736FED40051D306 /* CharacterCreationLayer.h */,
+				D82C7C451736FED40051D306 /* CharacterCreationLayer.m */,
+				D86E23951738C39400915020 /* CharacterClassLayer.h */,
+				D86E23961738C39400915020 /* CharacterClassLayer.m */,
+			);
+			name = "Character Creation";
+			sourceTree = "<group>";
+		};
+		D86E23AB1738D82600915020 /* Character Class Images */ = {
+			isa = PBXGroup;
+			children = (
+				D86E23A51738D7EA00915020 /* Brute.png */,
+				D86E23A61738D7EA00915020 /* Rogue.png */,
+				D86E23A71738D7EB00915020 /* Soldier.png */,
+			);
+			name = "Character Class Images";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -914,6 +949,9 @@
 				D82C7AD517339AF30051D306 /* Icon@2x.png in Resources */,
 				D82C7AD817339AF30051D306 /* iTunesArtwork in Resources */,
 				D82C7C1617339AF70051D306 /* ChangeLog in Resources */,
+				D86E23A81738D7EB00915020 /* Brute.png in Resources */,
+				D86E23A91738D7EB00915020 /* Rogue.png in Resources */,
+				D86E23AA1738D7EB00915020 /* Soldier.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1030,6 +1068,8 @@
 				D82C7C3E17339AF70051D306 /* IntroLayer.m in Sources */,
 				D82C7C461736FED40051D306 /* CharacterCreationLayer.m in Sources */,
 				D86E238E17376CFF00915020 /* CCScrollLayer.m in Sources */,
+				D86E23911738A49C00915020 /* CCTextField.m in Sources */,
+				D86E23971738C39400915020 /* CharacterClassLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

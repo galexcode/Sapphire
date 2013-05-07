@@ -7,7 +7,10 @@
 //
 
 #import "CharacterCreationLayer.h"
+#import "CharacterClassLayer.h"
 #import "CCScrollLayer.h"
+#import "CCTextField.h"
+#import "CCLabelTTF.h"
 
 @implementation CharacterCreationLayer 
 // Helper class method that creates a Scene with the HelloWorldLayer as the only child.
@@ -30,28 +33,53 @@
     if ((self = [super init])){
         
         CGSize size = [[CCDirector sharedDirector] winSize];
-        UITextField *nameTextField = [[[UITextField alloc]initWithFrame:CGRectMake(0, 0, 200, 200)]autorelease];
-        [nameTextField setBackgroundColor:[UIColor whiteColor]];
-        [nameTextField setBorderStyle: UITextBorderStyleRoundedRect];
-        [nameTextField setDelegate:self];
-//        [[[CCDirector sharedDirector] view]addSubview:nameTextField];
-        CCLayer *layer = [[[CCLayer alloc]init]autorelease];
-        CCLabelTTF *nameLabel = [[[CCLabelTTF alloc]initWithString:@"Name" fontName:@"Marker Felt" fontSize:30]autorelease];
-        [nameLabel setPosition:ccp(size.width / 2, size.height / 2)];
         
-        CCLayer *layer2 = [[[CCLayer alloc]init]autorelease];
-        CCLabelTTF *nameLabel2 = [[[CCLabelTTF alloc]initWithString:@"Name" fontName:@"Marker Felt" fontSize:30]autorelease];
-        [layer2 addChild:nameLabel2];
+//        CCLayer *layer = [[[CCLayer alloc]init]autorelease];
+//        CCLabelTTF *nameLabel = [[[CCLabelTTF alloc]initWithString:@"Name" fontName:@"Marker Felt" fontSize:30]autorelease];
+//        [nameLabel setPosition:ccp(size.width / 2, size.height / 2)];
+//        
+//        CCLayer *layer2 = [[[CCLayer alloc]init]autorelease];
+//        CCLabelTTF *nameLabel2 = [[[CCLabelTTF alloc]initWithString:@"Name" fontName:@"Marker Felt" fontSize:30]autorelease];
+//        
+//        [layer2 addChild:nameLabel2];
+//        [layer addChild:nameLabel];
+//        NSArray *arrayOfLayers = [NSArray arrayWithObjects:layer,layer2, nil];
+
+        NSArray *arrayOfClassLayers = [self createCharacterClassArray];
         
-        [layer addChild:nameLabel];
-        NSArray *arrayOfLayers = [NSArray arrayWithObjects:layer,layer2, nil];
-        CCScrollLayer *scrollLayer = [[[CCScrollLayer alloc]initWithLayers:arrayOfLayers widthOffset:0]autorelease];
+        CCScrollLayer *scrollLayer = [[[CCScrollLayer alloc]initWithLayers:arrayOfClassLayers widthOffset:0]autorelease];
         [self addChild:scrollLayer];
     }
     return self;
 }
+
+- (NSArray *) createCharacterClassArray {
+    CharacterClassLayer *layer1 = [[[CharacterClassLayer alloc]initWithProperties: @"Soldier" : @"Soldier.png"] autorelease];
+    CharacterClassLayer *layer2 = [[[CharacterClassLayer alloc]initWithProperties: @"Rogue" : @"Rogue.png"] autorelease];
+    CharacterClassLayer *layer3 = [[[CharacterClassLayer alloc]initWithProperties:@"Brute" :@"Brute.png"]autorelease];
+    NSArray *arrayOfLayers = [NSArray arrayWithObjects:layer1,layer2,layer3, nil];
+    return arrayOfLayers;
+}
+
+///** 
+// *  Creates a new UITextfield with white background and rounded edges for use in the character creation layer
+// **/
+//- (UITextField *) createCharacterCreationTextField : (int) x : (int) y : (int) width : (int) height{
+//    UITextField *newTextField = [[UITextField alloc]initWithFrame:CGRectMake(x, y, width, height)];
+//    [newTextField setBackgroundColor:[UIColor whiteColor]];
+//    [newTextField setBorderStyle: UITextBorderStyleRoundedRect];
+//    [newTextField setDelegate:self];
+//    return newTextField;
+//}
+
+
+
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
     return NO;
+}
+
+- (void) dealloc {
+    [super dealloc];
 }
 @end

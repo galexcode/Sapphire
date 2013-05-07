@@ -13,5 +13,6 @@
     
 }
 +(CCScene *) scene;
-
+//- (UITextField *) createCharacterCreationTextField : (int) x : (int) y : (int) width : (int) height;
+- (NSArray *) createCharacterClassArray;
 @end
