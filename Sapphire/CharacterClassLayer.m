@@ -7,12 +7,13 @@
 //
 
 #import "CharacterClassLayer.h"
-
+#import "CharacterAttributeLayer.h"
 
 @implementation CharacterClassLayer
 @synthesize className;
 @synthesize classImage;
 @synthesize classButton;
+
 
 -(id) initWithProperties : (NSString *) name : (NSString *) imageFilePath {
     if ((self = [super init])){
@@ -32,14 +33,17 @@
             
         // Comment this out for now until we have a placeholder image for select
 //        self.classButton = [CCMenuItemImage itemWithNormalImage:@"" selectedImage:@"" block:^(id sender) {
-            // Do something
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionPageTurn transitionWithDuration:0.5f scene:[CharacterAttributeLayer scene]]];
+            
         }];
-        [self.classButton setPosition:ccp (size.width / 2, size.height / 4)];
+//        [self.classButton setPosition:ccp (size.width / 2, size.height / 4)];
         
+        CCMenu *menu = [CCMenu menuWithArray:[NSArray arrayWithObject: self.classButton]];
+        [menu setPosition:ccp (size.width/2, size.height /4)];
         // Add the Stuff to the parent class to display
-        [self addChild: self.className];
-        [self addChild: self.classImage];
-        [self addChild: self.classButton];
+        [self addChild:className];
+        [self addChild:classImage];
+        [self addChild: menu];
         
     }
     return self;

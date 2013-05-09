@@ -49,6 +49,7 @@
         
         CCScrollLayer *scrollLayer = [[[CCScrollLayer alloc]initWithLayers:arrayOfClassLayers widthOffset:0]autorelease];
         [self addChild:scrollLayer];
+        [scrollLayer setIsTouchEnabled:YES];
     }
     return self;
 }

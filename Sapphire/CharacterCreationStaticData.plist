@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Warrior</key>
+	<dict>
+		<key>Attribute Points</key>
+		<integer>20</integer>
+	</dict>
+	<key>Rogue</key>
+	<dict>
+		<key>Attribute Points</key>
+		<integer>25</integer>
+	</dict>
+	<key>Brute</key>
+	<dict>
+		<key>Attribute Points</key>
+		<integer>27</integer>
+	</dict>
+</dict>
+</plist>
