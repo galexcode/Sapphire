@@ -7,6 +7,7 @@
 //
 
 #import "CharacterAttributeLayer.h"
+#import "CharacterCreationLayer.h"
 
 
 @implementation CharacterAttributeLayer
@@ -16,39 +17,14 @@
 @synthesize speedMenu;
 @synthesize attributePoints;
 @synthesize attributePointsLabel;
-
-static CharacterAttributeLayer* _sharedInstance = nil;
-
-+(CharacterAttributeLayer*) sharedInstance
-{
-	@synchronized([CharacterAttributeLayer class])
-	{
-		if (!_sharedInstance)
-			[[self alloc] init];
-        
-		return _sharedInstance;
-	}
-    
-	return nil;
-}
-
-+(id)alloc
-{
-	@synchronized([CharacterAttributeLayer class])
-	{
-		NSAssert(_sharedInstance == nil, @"Attempted to allocate a second instance of a singleton.");
-		_sharedInstance = [super alloc];
-		return _sharedInstance;
-	}
-    
-	return nil;
-}
+@synthesize backButton;
+@synthesize nextButton;
 
 +(CCScene *) scene
 {
 	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
-	
+        
 	// 'layer' is an autorelease object.
 	CharacterAttributeLayer *layer = [CharacterAttributeLayer node];
 	
@@ -65,23 +41,60 @@ static CharacterAttributeLayer* _sharedInstance = nil;
         CGSize size = [[CCDirector sharedDirector] winSize];
         NSString *plistPath = [[NSBundle mainBundle]pathForResource:@"CharacterCreationStaticData" ofType:@"plist"];
         NSDictionary *characterClassDictionary = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+        for (NSString* key in characterClassDictionary){
+        }
+        self.healthMenu = [[[CharacterAttributeMenu alloc]initWithAttributeType:@"Health" : 0 : self]autorelease];
+        self.speedMenu = [[[CharacterAttributeMenu alloc]initWithAttributeType:@"Speed" : 0 : self]autorelease];
+        self.powerMenu = [[[CharacterAttributeMenu alloc]initWithAttributeType:@"Power" : 0 : self]autorelease];
         
-        self.healthMenu = [[[CharacterAttributeMenu alloc]initWithAttributeType:@"Health" : 0]autorelease];
-        self.speedMenu = [[[CharacterAttributeMenu alloc]initWithAttributeType:@"Speed" : 0]autorelease];
-        self.powerMenu = [[[CharacterAttributeMenu alloc]initWithAttributeType:@"Power" : 0]autorelease];
+        self.attributePoints = [[CharacterCreationModel sharedInstance] attributePoints];
+        self.attributePointsLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Attribute Points Left: %d",self.attributePoints] fontName:@"Marker Felt" fontSize:30];
+        [self.attributePointsLabel setPosition:ccp (size.width / 2, size.height * 4/5)];
         
-        [self.healthMenu setPosition:ccp (size.width / 2, size.height * 3/4)];
-        [self.speedMenu setPosition:ccp (size.width / 2, size.height * 2/4)];
-        [self.powerMenu setPosition:ccp (size.width / 2, size.height * 1/4)];
+        [self.healthMenu setPosition:ccp (size.width / 2, size.height * 3/5)];
+        [self.speedMenu setPosition:ccp (size.width / 2, size.height * 2/5)];
+        [self.powerMenu setPosition:ccp (size.width / 2, size.height * 1/5)];
         
+        self.nextButton = [CCMenuItemFont itemWithString:@"Next" block:^(id sender) {
+            if (self.attributePoints > 0) {
+                UIAlertView *attributePointsAlert = [[[UIAlertView alloc]initWithTitle:@"Leftover Points" message:@" You haven't used up all your attribute points! \n Are you sure you want to continue?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil] autorelease];
+                [attributePointsAlert show];
+            }
+            else {
+                [self continueToNextScene];
+            }
+        }];
+        self.backButton = [CCMenuItemFont itemWithString:@"Back" block:^(id sender) {
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[CharacterCreationLayer scene]]];
+        }];
+        
+        CCMenu *navigationMenu =[CCMenu menuWithItems:self.backButton,self.nextButton, nil];
+        [navigationMenu setPosition:ccp (size.width / 2, size.height * 9 / 10)];
+        [navigationMenu alignItemsHorizontallyWithPadding:size.width * 2 / 3];
+        
+        [self addChild:navigationMenu];
+        [self addChild:self.attributePointsLabel];
         [self addChild:self.speedMenu];
         [self addChild:self.powerMenu];
         [self addChild:self.healthMenu];
     }
     return self;
 }
-- (void) printSHIT {
-    NSLog(@"IOWJDQOIDJJQDWQJD");
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1){
+        [self continueToNextScene];
+    }
+}
+- (void) continueToNextScene {
+    // Save the information into the model
+    [[CharacterCreationModel sharedInstance] setHealth:self.healthMenu.attributeValue];
+    [[CharacterCreationModel sharedInstance] setSpeed:self.speedMenu.attributeValue];
+    [[CharacterCreationModel sharedInstance] setPower:self.powerMenu.attributeValue];
+}
+- (void) updateAttributePointsLabel : (NSInteger) increment {
+    self.attributePoints += increment;
+    [self.attributePointsLabel setString: [NSString stringWithFormat:@"Attribute Points Left: %d",self.attributePoints]];
 }
 
 - (void) dealloc {
@@ -91,5 +104,7 @@ static CharacterAttributeLayer* _sharedInstance = nil;
     [powerMenu release];
     [nameTextField release];
     [healthMenu release];
+    [nextButton release];
+    [backButton release];
 }
 @end

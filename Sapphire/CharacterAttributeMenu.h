@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+@class CharacterAttributeLayer;
+
 @interface CharacterAttributeMenu : CCMenu {
     CCMenuItemLabel* minusButton;
     CCMenuItemLabel* attributeType;
@@ -24,5 +26,5 @@
 @property (nonatomic,retain) CCMenuItemLabel* plusButton;
 @property (nonatomic,retain) CCMenuItemLabel* valueLabel;
 
-- (id) initWithAttributeType : (NSString *) attribute :(NSInteger) defaultValue;
+- (id) initWithAttributeType : (NSString *) attribute :(NSInteger) defaultValue : (CharacterAttributeLayer *) layer;
 @end

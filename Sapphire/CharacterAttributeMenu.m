@@ -16,19 +16,25 @@
 @synthesize attributeValue;
 @synthesize valueLabel;
 
-- (id) initWithAttributeType : (NSString *) attribute :(NSInteger) defaultValue {
+- (id) initWithAttributeType : (NSString *) attribute :(NSInteger) defaultValue :(CharacterAttributeLayer *) layer{
     if ((self = [super init])){
         self.attributeValue = defaultValue;
         self.minusButton = [CCMenuItemFont itemWithString:@"-" block:^(id sender) {
-            // Minus some shit
-            self.attributeValue = self.attributeValue <= 0 ? 0 : self.attributeValue - 1;
-            [((CCMenuItemFont*) self.valueLabel) setString:[NSString stringWithFormat:(@"%d"),self.attributeValue]];
-            [[CharacterAttributeLayer sharedInstance] printSHIT];
-            
+            // Only increment the attribute points if there is value to decrement
+            if (self.attributeValue > 0) {
+                self.attributeValue-= 1;
+                [((CCMenuItemFont*) self.valueLabel) setString:[NSString stringWithFormat:(@"%d"),self.attributeValue]];
+                [layer updateAttributePointsLabel:1];
+            }
         }];
         self.plusButton = [CCMenuItemFont itemWithString:@"+" block:^(id sender) {
-            self.attributeValue++;
-            [((CCMenuItemFont*) self.valueLabel) setString:[NSString stringWithFormat:(@"%d"),self.attributeValue]];
+            // Only decrement the attribute points if the attribute points are greater than 0
+            if ([layer attributePoints] > 0){
+                self.attributeValue += 1;
+                [((CCMenuItemFont*) self.valueLabel) setString:[NSString stringWithFormat:(@"%d"),self.attributeValue]];
+                [layer updateAttributePointsLabel:-1];
+            }
+
         }];
         self.attributeType = [CCMenuItemFont itemWithString:attribute];
         self.valueLabel = [CCMenuItemFont itemWithString:[NSString stringWithFormat:(@"%d"),self.attributeValue]];
@@ -45,10 +51,13 @@
         
         [self.minusButton setScale:2.5];
         [self.plusButton setScale:2.5];
-        [self.valueLabel setAnchorPoint:ccp(-3,0.5)];
+      
+        
+//        [self.valueLabel setAnchorPoint:ccp(-3,0.5)];
+          [self.valueLabel setPosition: ccp(self.valueLabel.contentSize.width * 0.5, self.valueLabel.contentSize.height * 0.5)];
         
 
-        [self alignItemsHorizontally];
+        [self alignItemsHorizontallyWithPadding:90];
         
     }
     return self;

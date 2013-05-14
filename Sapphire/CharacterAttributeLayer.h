@@ -9,14 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "CharacterAttributeMenu.h"
+#import "CharacterCreationModel.h"
 
-@interface CharacterAttributeLayer : CCLayer {
+@interface CharacterAttributeLayer : CCLayer <UIAlertViewDelegate> {
     UITextField *nameTextField;
     CharacterAttributeMenu *healthMenu;
     CharacterAttributeMenu *speedMenu;
     CharacterAttributeMenu *powerMenu;
     NSInteger attributePoints;
     CCLabelTTF *attributePointsLabel;
+    CCMenuItem *nextButton;
+    CCMenuItem *backButton;
 }
 
 @property (nonatomic, retain) UITextField *nameTextField;
@@ -25,8 +28,10 @@
 @property (nonatomic, retain) CharacterAttributeMenu *powerMenu;
 @property (nonatomic, assign) NSInteger attributePoints;
 @property (nonatomic, retain) CCLabelTTF *attributePointsLabel;
+@property (nonatomic, retain) CCMenuItem *nextButton;
+@property (nonatomic, retain) CCMenuItem *backButton;
 
 +(CCScene *) scene;
-+(CharacterAttributeLayer *) sharedInstance;
-- (void) printSHIT;
+- (void) updateAttributePointsLabel : (NSInteger) increment;
+
 @end

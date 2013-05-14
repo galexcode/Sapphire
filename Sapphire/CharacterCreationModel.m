@@ -10,6 +10,11 @@
 
 
 @implementation CharacterCreationModel
+@synthesize health;
+@synthesize speed;
+@synthesize power;
+@synthesize characterClass;
+@synthesize attributePoints;
 
 static CharacterCreationModel* _sharedInstance = nil;
 
@@ -38,5 +43,9 @@ static CharacterCreationModel* _sharedInstance = nil;
 	return nil;
 }
 
+- (void) dealloc {
+    [super dealloc];
+    [characterClass release];
+}
 
 @end

@@ -15,7 +15,7 @@
 @synthesize classButton;
 
 
--(id) initWithProperties : (NSString *) name : (NSString *) imageFilePath {
+-(id) initWithProperties : (NSString *) name : (NSInteger) attributePoints{
     if ((self = [super init])){
         CGSize size = [[CCDirector sharedDirector] winSize];
         
@@ -25,6 +25,7 @@
         [self.className setPosition: ccp (size.width / 2, size.height * 3/4)];
     
         // Instantiate the image of the desired class
+        NSString* imageFilePath = [NSString stringWithFormat:@"%@.png",name];
         self.classImage = [CCSprite spriteWithFile: imageFilePath];
         [self.classImage setPosition:ccp(size.width / 2, size.height /2)];
         
@@ -33,7 +34,9 @@
             
         // Comment this out for now until we have a placeholder image for select
 //        self.classButton = [CCMenuItemImage itemWithNormalImage:@"" selectedImage:@"" block:^(id sender) {
-            [[CCDirector sharedDirector] replaceScene:[CCTransitionPageTurn transitionWithDuration:0.5f scene:[CharacterAttributeLayer scene]]];
+            [[CharacterCreationModel sharedInstance] setCharacterClass:name];
+            [[CharacterCreationModel sharedInstance] setAttributePoints:attributePoints];
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[CharacterAttributeLayer scene]]];
             
         }];
 //        [self.classButton setPosition:ccp (size.width / 2, size.height / 4)];

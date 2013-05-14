@@ -13,9 +13,14 @@
     NSInteger health;
     NSInteger speed;
     NSInteger power;
+    NSInteger attributePoints;
     NSString *characterClass;
     
 }
 +(CharacterCreationModel *) sharedInstance;
-
+@property (nonatomic, assign) NSInteger health;
+@property (nonatomic, assign) NSInteger speed;
+@property (nonatomic, assign) NSInteger power;
+@property (nonatomic, assign) NSInteger attributePoints;
+@property (nonatomic, retain) NSString *characterClass;
 @end

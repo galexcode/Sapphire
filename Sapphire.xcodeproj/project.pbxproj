@@ -145,6 +145,7 @@
 		D8DCC4ED173A17FE000F8F93 /* CharacterAttributeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DCC4EC173A17FE000F8F93 /* CharacterAttributeMenu.m */; };
 		D8DCC4F0173B6D86000F8F93 /* CharacterCreationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DCC4EF173B6D86000F8F93 /* CharacterCreationModel.m */; };
 		D8DCC4F2173B77F4000F8F93 /* CharacterCreationStaticData.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8DCC4F1173B77F4000F8F93 /* CharacterCreationStaticData.plist */; };
+		D8DCC4F51740A420000F8F93 /* CharacterConfirmationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DCC4F41740A420000F8F93 /* CharacterConfirmationLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -429,6 +430,8 @@
 		D8DCC4EE173B6D86000F8F93 /* CharacterCreationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterCreationModel.h; sourceTree = "<group>"; };
 		D8DCC4EF173B6D86000F8F93 /* CharacterCreationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterCreationModel.m; sourceTree = "<group>"; };
 		D8DCC4F1173B77F4000F8F93 /* CharacterCreationStaticData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CharacterCreationStaticData.plist; sourceTree = "<group>"; };
+		D8DCC4F31740A41F000F8F93 /* CharacterConfirmationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterConfirmationLayer.h; sourceTree = "<group>"; };
+		D8DCC4F41740A420000F8F93 /* CharacterConfirmationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterConfirmationLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -891,6 +894,8 @@
 				D8DCC4EC173A17FE000F8F93 /* CharacterAttributeMenu.m */,
 				D8DCC4EE173B6D86000F8F93 /* CharacterCreationModel.h */,
 				D8DCC4EF173B6D86000F8F93 /* CharacterCreationModel.m */,
+				D8DCC4F31740A41F000F8F93 /* CharacterConfirmationLayer.h */,
+				D8DCC4F41740A420000F8F93 /* CharacterConfirmationLayer.m */,
 				D8DCC4F1173B77F4000F8F93 /* CharacterCreationStaticData.plist */,
 			);
 			name = "Character Creation";
@@ -1096,6 +1101,7 @@
 				D8DCC4EA1739F48C000F8F93 /* CharacterAttributeLayer.m in Sources */,
 				D8DCC4ED173A17FE000F8F93 /* CharacterAttributeMenu.m in Sources */,
 				D8DCC4F0173B6D86000F8F93 /* CharacterCreationModel.m in Sources */,
+				D8DCC4F51740A420000F8F93 /* CharacterConfirmationLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

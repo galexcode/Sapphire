@@ -8,11 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "CCScrollLayer.h"
 
 @interface CharacterCreationLayer : CCLayer <UITextFieldDelegate> {
-    
+    CCScrollLayer *scrollLayer;
 }
+
+@property (nonatomic, retain) CCScrollLayer *scrollLayer;
+
 +(CCScene *) scene;
-//- (UITextField *) createCharacterCreationTextField : (int) x : (int) y : (int) width : (int) height;
 - (NSArray *) createCharacterClassArray;
+
+extern NSString* const ATTRIBUTE_POINTS;
+extern NSString* const PLIST_NAME;
 @end

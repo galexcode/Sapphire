@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "CharacterCreationModel.h"
 
 @interface CharacterClassLayer : CCLayer {
     CCLabelTTF *className;
@@ -19,5 +20,5 @@
 @property (nonatomic, retain) CCMenuItem *classButton;
 @property (nonatomic, retain) CCSprite *classImage;
 
--(id) initWithProperties : (NSString *) name : (NSString *) imageFilePath;
+-(id) initWithProperties : (NSString *) name : (NSInteger) attributePoints;
 @end

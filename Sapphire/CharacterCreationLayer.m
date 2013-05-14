@@ -12,7 +12,11 @@
 #import "CCTextField.h"
 #import "CCLabelTTF.h"
 
-@implementation CharacterCreationLayer 
+NSString* const ATTRIBUTE_POINTS = @"Attribute Points";
+NSString* const PLIST_NAME = @"CharacterCreationStaticData";
+
+@implementation CharacterCreationLayer
+@synthesize scrollLayer;
 // Helper class method that creates a Scene with the HelloWorldLayer as the only child.
 +(CCScene *) scene
 {
@@ -33,45 +37,29 @@
     if ((self = [super init])){
         
         CGSize size = [[CCDirector sharedDirector] winSize];
-        
-//        CCLayer *layer = [[[CCLayer alloc]init]autorelease];
-//        CCLabelTTF *nameLabel = [[[CCLabelTTF alloc]initWithString:@"Name" fontName:@"Marker Felt" fontSize:30]autorelease];
-//        [nameLabel setPosition:ccp(size.width / 2, size.height / 2)];
-//        
-//        CCLayer *layer2 = [[[CCLayer alloc]init]autorelease];
-//        CCLabelTTF *nameLabel2 = [[[CCLabelTTF alloc]initWithString:@"Name" fontName:@"Marker Felt" fontSize:30]autorelease];
-//        
-//        [layer2 addChild:nameLabel2];
-//        [layer addChild:nameLabel];
-//        NSArray *arrayOfLayers = [NSArray arrayWithObjects:layer,layer2, nil];
-
         NSArray *arrayOfClassLayers = [self createCharacterClassArray];
         
-        CCScrollLayer *scrollLayer = [[[CCScrollLayer alloc]initWithLayers:arrayOfClassLayers widthOffset:0]autorelease];
+        self.scrollLayer = [[[CCScrollLayer alloc]initWithLayers:arrayOfClassLayers widthOffset:0]autorelease];
         [self addChild:scrollLayer];
-        [scrollLayer setIsTouchEnabled:YES];
     }
     return self;
 }
 
 - (NSArray *) createCharacterClassArray {
-    CharacterClassLayer *layer1 = [[[CharacterClassLayer alloc]initWithProperties: @"Soldier" : @"Soldier.png"] autorelease];
-    CharacterClassLayer *layer2 = [[[CharacterClassLayer alloc]initWithProperties: @"Rogue" : @"Rogue.png"] autorelease];
-    CharacterClassLayer *layer3 = [[[CharacterClassLayer alloc]initWithProperties:@"Brute" :@"Brute.png"]autorelease];
-    NSArray *arrayOfLayers = [NSArray arrayWithObjects:layer1,layer2,layer3, nil];
+    NSString *plistPath = [[NSBundle mainBundle]pathForResource:PLIST_NAME ofType:@"plist"];
+    NSDictionary *characterClassDictionary = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    
+    NSMutableArray *arrayOfLayers = [NSMutableArray array];
+    for (NSString* key in characterClassDictionary){
+        NSInteger attributePoints = [[[characterClassDictionary objectForKey:key] objectForKey:ATTRIBUTE_POINTS]intValue];
+        CharacterClassLayer *layer = [[[CharacterClassLayer alloc]initWithProperties
+            :key
+            :attributePoints]autorelease];
+        [arrayOfLayers addObject:layer];
+    }
+
     return arrayOfLayers;
 }
-
-///** 
-// *  Creates a new UITextfield with white background and rounded edges for use in the character creation layer
-// **/
-//- (UITextField *) createCharacterCreationTextField : (int) x : (int) y : (int) width : (int) height{
-//    UITextField *newTextField = [[UITextField alloc]initWithFrame:CGRectMake(x, y, width, height)];
-//    [newTextField setBackgroundColor:[UIColor whiteColor]];
-//    [newTextField setBorderStyle: UITextBorderStyleRoundedRect];
-//    [newTextField setDelegate:self];
-//    return newTextField;
-//}
 
 
 
@@ -82,5 +70,6 @@
 
 - (void) dealloc {
     [super dealloc];
+    [scrollLayer release];
 }
 @end
