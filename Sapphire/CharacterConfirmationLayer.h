@@ -9,8 +9,28 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface CharacterConfirmationLayer : CCLayer {
-    
+@interface CharacterConfirmationLayer : CCLayer  <UITextFieldDelegate>{
+    CCSprite *characterClassSprite;
+    CCLabelTTF *characterClassLabel;
+    CCLabelTTF *healthLabel;
+    CCLabelTTF *speedLabel;
+    CCLabelTTF *powerLabel;
+    UITextField *nameTextField;
+    CCLabelTTF *nameLabel;
+    CCMenuItemLabel *startButton;
+    CCMenuItemLabel *backButton;
 }
+
+@property (nonatomic,retain) CCSprite *characterClassSprite;
+@property (nonatomic,retain) CCLabelTTF *characterClassLabel;
+@property (nonatomic,retain) CCLabelTTF *healthLabel;
+@property (nonatomic,retain) CCLabelTTF *speedLabel;
+@property (nonatomic,retain) CCLabelTTF *powerLabel;
+@property (nonatomic,retain) UITextField *nameTextField;
+@property (nonatomic,retain) CCLabelTTF *nameLabel;
+@property (nonatomic,retain) CCMenuItemLabel *startButton;
+@property (nonatomic,retain) CCMenuItemLabel *backButton;
+
++(CCScene *) scene;
 
 @end

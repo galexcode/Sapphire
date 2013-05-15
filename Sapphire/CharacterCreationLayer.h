@@ -12,9 +12,11 @@
 
 @interface CharacterCreationLayer : CCLayer <UITextFieldDelegate> {
     CCScrollLayer *scrollLayer;
+    CCMenuItemLabel *backButton;
 }
 
 @property (nonatomic, retain) CCScrollLayer *scrollLayer;
+@property (nonatomic, retain) CCMenuItemLabel *backButton;
 
 +(CCScene *) scene;
 - (NSArray *) createCharacterClassArray;

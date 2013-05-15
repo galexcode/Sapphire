@@ -15,6 +15,7 @@
     NSInteger power;
     NSInteger attributePoints;
     NSString *characterClass;
+    NSString *playerName;
     
 }
 +(CharacterCreationModel *) sharedInstance;
@@ -23,4 +24,5 @@
 @property (nonatomic, assign) NSInteger power;
 @property (nonatomic, assign) NSInteger attributePoints;
 @property (nonatomic, retain) NSString *characterClass;
+@property (nonatomic, retain) NSString *playerName;
 @end

@@ -6,6 +6,7 @@
 //  Copyright 2013 University of Waterloo. All rights reserved.
 //
 
+#import "MainMenuLayer.h"
 #import "CharacterCreationLayer.h"
 #import "CharacterClassLayer.h"
 #import "CCScrollLayer.h"
@@ -17,6 +18,8 @@ NSString* const PLIST_NAME = @"CharacterCreationStaticData";
 
 @implementation CharacterCreationLayer
 @synthesize scrollLayer;
+@synthesize backButton;
+
 // Helper class method that creates a Scene with the HelloWorldLayer as the only child.
 +(CCScene *) scene
 {
@@ -40,6 +43,13 @@ NSString* const PLIST_NAME = @"CharacterCreationStaticData";
         NSArray *arrayOfClassLayers = [self createCharacterClassArray];
         
         self.scrollLayer = [[[CCScrollLayer alloc]initWithLayers:arrayOfClassLayers widthOffset:0]autorelease];
+        self.backButton = [CCMenuItemFont itemWithString:@"Back" block:^(id sender) {
+            [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[MainMenuLayer scene]]];
+        }];
+        CCMenu *backButtonMenu = [CCMenu menuWithItems:self.backButton, nil];
+        [backButtonMenu setPosition:ccp (size.width * 1/8, size.height * 9/10)];
+        
+        [self addChild:backButtonMenu];
         [self addChild:scrollLayer];
     }
     return self;

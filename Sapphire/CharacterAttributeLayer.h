@@ -32,6 +32,7 @@
 @property (nonatomic, retain) CCMenuItem *backButton;
 
 +(CCScene *) scene;
++ (CCScene *) modelScene;
 - (void) updateAttributePointsLabel : (NSInteger) increment;
 
 @end

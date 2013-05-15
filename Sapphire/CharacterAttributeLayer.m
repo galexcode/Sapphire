@@ -8,6 +8,7 @@
 
 #import "CharacterAttributeLayer.h"
 #import "CharacterCreationLayer.h"
+#import "CharacterConfirmationLayer.h"
 
 
 @implementation CharacterAttributeLayer
@@ -35,7 +36,20 @@
 	return scene;
 }
 
-
++ (CCScene *) modelScene {
+    
+    // 'scene' is an autorelease object.
+	CCScene *scene = [CCScene node];
+    
+	// 'layer' is an autorelease object.
+	CharacterAttributeLayer *layer = [[[CharacterAttributeLayer alloc]initWithModelValues] autorelease];
+	
+	// add layer as a child to scene
+	[scene addChild: layer];
+	
+	// return the scene
+	return scene;
+}
 - (id) init {
     if ((self = [super init])){
         CGSize size = [[CCDirector sharedDirector] winSize];
@@ -81,6 +95,24 @@
     return self;
 }
 
+- (id) initWithModelValues {
+    if ((self = [self init])){
+        [self.healthMenu setAttributeValue:[[CharacterCreationModel sharedInstance]health]];
+        [[self.healthMenu valueLabel] setString:[NSString stringWithFormat:@"%d",[[CharacterCreationModel sharedInstance] health]]];
+        [self.powerMenu setAttributeValue:[[CharacterCreationModel sharedInstance]power]];
+        [[self.powerMenu valueLabel] setString:[NSString stringWithFormat:@"%d",[[CharacterCreationModel sharedInstance] power]]];
+        [self.speedMenu setAttributeValue:[[CharacterCreationModel sharedInstance]speed]];
+        [[self.speedMenu valueLabel] setString:[NSString stringWithFormat:@"%d",[[CharacterCreationModel sharedInstance] speed]]];
+        self.attributePoints = [[CharacterCreationModel sharedInstance] attributePoints]
+        - [self.speedMenu attributeValue]
+        - [self.powerMenu attributeValue]
+        - [self.healthMenu attributeValue];
+        [self.attributePointsLabel setString: [NSString stringWithFormat:@"Attribute Points Left: %d",self.attributePoints]];
+    }
+    return self;
+
+}
+
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1){
         [self continueToNextScene];
@@ -91,10 +123,12 @@
     [[CharacterCreationModel sharedInstance] setHealth:self.healthMenu.attributeValue];
     [[CharacterCreationModel sharedInstance] setSpeed:self.speedMenu.attributeValue];
     [[CharacterCreationModel sharedInstance] setPower:self.powerMenu.attributeValue];
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[CharacterConfirmationLayer scene]]];
 }
 - (void) updateAttributePointsLabel : (NSInteger) increment {
     self.attributePoints += increment;
     [self.attributePointsLabel setString: [NSString stringWithFormat:@"Attribute Points Left: %d",self.attributePoints]];
+    
 }
 
 - (void) dealloc {

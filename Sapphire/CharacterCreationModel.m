@@ -15,6 +15,7 @@
 @synthesize power;
 @synthesize characterClass;
 @synthesize attributePoints;
+@synthesize playerName;
 
 static CharacterCreationModel* _sharedInstance = nil;
 
@@ -46,6 +47,7 @@ static CharacterCreationModel* _sharedInstance = nil;
 - (void) dealloc {
     [super dealloc];
     [characterClass release];
+    [playerName release];
 }
 
 @end
